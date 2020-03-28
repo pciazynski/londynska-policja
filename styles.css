@@ -21,6 +21,7 @@ body {
 }
 
 #canvas {
+  pointer-events: none;
   position: relative;
   z-index: 20;
 }
