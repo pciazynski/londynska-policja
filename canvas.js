@@ -16,3 +16,7 @@ function init() {
     ctx.stroke();
   }
 }
+
+function selectPoint(number) {
+  console.log(`clicked on point number: ${number}`)
+}
