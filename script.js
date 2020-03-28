@@ -39,17 +39,15 @@ function draw() {
 }
 
 function selectPoint(number) {
-  if (taxiNeighbours[selectedPoint].includes(number) && ticketsOfD.taxi > 0){
+  if (taxiNeighbours[selectedPoint].includes(number) && ticketsOfD.taxi > 0) {
     selectedPoint = number;
     draw();
 
     ticketsOfD.taxi--;
     ticketsOfX.taxi++;
 
-    console.log(`Remaining detective's tickets:`);
-    console.log(ticketsOfD);
-    console.log(`Remaining X's tickets: `);
-    console.log(ticketsOfX);
+    document.getElementById('ticketsOfD').innerHTML = JSON.stringify(ticketsOfD.taxi);
+    document.getElementById('ticketsOfX').innerHTML = JSON.stringify(ticketsOfX.taxi);
   }
 
 }
