@@ -1,5 +1,17 @@
 let selectedPoint = 2;
 
+const ticketsOfD = {
+  taxi: 5,
+  bus: 20,
+  metro: 10,
+};
+
+const ticketsOfX = {
+  taxi: 1,
+  bus: 1,
+  metro: 1,
+};
+
 function draw() {
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
@@ -27,12 +39,19 @@ function draw() {
 }
 
 function selectPoint(number) {
-  console.log(`previously selected point was: ${selectedPoint}`);
-  if (taxiNeighbours[selectedPoint].includes(number)){
+  if (taxiNeighbours[selectedPoint].includes(number) && ticketsOfD.taxi > 0){
     selectedPoint = number;
-    console.log(`currently selected point is: ${selectedPoint}`);
     draw();
+
+    ticketsOfD.taxi--;
+    ticketsOfX.taxi++;
+
+    console.log(`Remaining detective's tickets:`);
+    console.log(ticketsOfD);
+    console.log(`Remaining X's tickets: `);
+    console.log(ticketsOfX);
   }
+
 }
 
 const taxiNeighbours = {
