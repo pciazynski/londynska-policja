@@ -28,9 +28,11 @@ function draw() {
 
 function selectPoint(number) {
   console.log(`previously selected point was: ${selectedPoint}`);
-  selectedPoint = number;
-  console.log(`currently selected point is: ${selectedPoint}`);
-  draw();
+  if (taxiNeighbours[selectedPoint].includes(number)){
+    selectedPoint = number;
+    console.log(`currently selected point is: ${selectedPoint}`);
+    draw();
+  }
 }
 
 const taxiNeighbours = {
