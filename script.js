@@ -36,18 +36,17 @@ function draw() {
       rs[point][3] - rs[point][1]);
     ctx.fill();
   });
+
+  document.getElementById('ticketsOfD').innerHTML = JSON.stringify(ticketsOfD.taxi);
+  document.getElementById('ticketsOfX').innerHTML = JSON.stringify(ticketsOfX.taxi);
 }
 
 function selectPoint(number) {
   if (taxiNeighbours[selectedPoint].includes(number) && ticketsOfD.taxi > 0) {
     selectedPoint = number;
-    draw();
-
     ticketsOfD.taxi--;
     ticketsOfX.taxi++;
-
-    document.getElementById('ticketsOfD').innerHTML = JSON.stringify(ticketsOfD.taxi);
-    document.getElementById('ticketsOfX').innerHTML = JSON.stringify(ticketsOfX.taxi);
+    draw();
   }
 
 }
