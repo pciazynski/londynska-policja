@@ -37,8 +37,22 @@ function draw() {
     ctx.fill();
   });
 
-  document.getElementById('ticketsOfD').innerHTML = JSON.stringify(ticketsOfD.taxi);
-  document.getElementById('ticketsOfX').innerHTML = JSON.stringify(ticketsOfX.taxi);
+  busNeighbours[selectedPoint].forEach(point => {
+    ctx.fillStyle = 'rgb(0, 200, 0, 0.3)';
+    ctx.beginPath();
+    ctx.rect(
+      rs[point][0],
+      rs[point][1],
+      rs[point][2] - rs[point][0],
+      rs[point][3] - rs[point][1]);
+    ctx.fill();
+  });
+
+  document.getElementById('taxiTicketsOfD').innerHTML = JSON.stringify(ticketsOfD.taxi);
+  document.getElementById('taxiTicketsOfX').innerHTML = JSON.stringify(ticketsOfX.taxi);
+
+  document.getElementById('busTicketsOfD').innerHTML = JSON.stringify(ticketsOfD.bus);
+  document.getElementById('busTicketsOfX').innerHTML = JSON.stringify(ticketsOfX.bus);
 }
 
 function selectPoint(number) {
@@ -49,6 +63,12 @@ function selectPoint(number) {
     draw();
   }
 
+  if (busNeighbours[selectedPoint].includes(number) && ticketsOfD.bus > 0) {
+    selectedPoint = number;
+    ticketsOfD.bus--;
+    ticketsOfX.bus++;
+    draw();
+  }
 }
 
 const taxiNeighbours = {
@@ -83,6 +103,41 @@ const taxiNeighbours = {
   78: [77, 61, 79],
   79: [78, 61, 63],
   80: [63],
+  82: [65],
+};
+
+const busNeighbours = {
+  2: [],
+  3: [22, 23],
+  4: [],
+  9: [],
+  10: [],
+  11: [],
+  12: [],
+  20: [],
+  21: [],
+  22: [3, 34, 23, 65],
+  23: [3, 22],
+  33: [],
+  34: [46, 22, 63],
+  35: [],
+  36: [],
+  45: [],
+  46: [78, 34],
+  47: [],
+  48: [],
+  49: [],
+  60: [],
+  61: [],
+  62: [],
+  63: [79, 34, 65],
+  64: [],
+  65: [82, 63, 22],
+  76: [],
+  77: [78],
+  78: [77, 46, 79],
+  79: [78, 63],
+  80: [],
   82: [65],
 };
 
