@@ -5,7 +5,7 @@ function draw() {
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = 'rgb(200, 0, 0, 0.4)';
+  ctx.fillStyle = 'rgb(200, 0, 0, 0.5)';
   ctx.beginPath();
   ctx.rect(
     rs[selectedPoint][0],
@@ -13,7 +13,17 @@ function draw() {
     rs[selectedPoint][2] - rs[selectedPoint][0],
     rs[selectedPoint][3] - rs[selectedPoint][1]);
   ctx.fill();
-  ctx.stroke();
+
+  taxiNeighbours[selectedPoint].forEach(point => {
+    ctx.fillStyle = 'rgb(0, 0, 200, 0.3)';
+    ctx.beginPath();
+    ctx.rect(
+      rs[point][0],
+      rs[point][1],
+      rs[point][2] - rs[point][0],
+      rs[point][3] - rs[point][1]);
+    ctx.fill();
+  });
 }
 
 function selectPoint(number) {
@@ -22,6 +32,41 @@ function selectPoint(number) {
   console.log(`currently selected point is: ${selectedPoint}`);
   draw();
 }
+
+const taxiNeighbours = {
+  2: [20, 10],
+  3: [11, 12, 4],
+  4: [3],
+  9: [45, 76],
+  10: [2, 11, 21, 34],
+  11: [10, 3, 22],
+  12: [3, 23],
+  20: [2, 33],
+  21: [33, 10],
+  22: [11, 34, 23, 35],
+  23: [12, 22],
+  33: [20, 21, 46],
+  34: [10, 47, 22, 48],
+  35: [22, 48, 36, 65],
+  36: [35, 49],
+  45: [60, 46, 9],
+  46: [61, 45, 47, 33],
+  47: [46, 34, 62],
+  48: [34, 62, 35, 63],
+  49: [36],
+  60: [45, 76, 61],
+  61: [46, 76, 62, 78],
+  62: [47, 61, 48, 79],
+  63: [79, 48, 64, 80],
+  64: [63, 65],
+  65: [35, 82],
+  76: [9, 60, 61, 77],
+  77: [76, 78],
+  78: [77, 61, 79],
+  79: [78, 61, 63],
+  80: [63],
+  82: [65],
+};
 
 const rs = {
   2: [314, 18, 354, 41],
